@@ -1,4 +1,4 @@
-package edu.rice.comp504.model;
+package edu.rice.comp610.model;
 
 /**
  * Represents a line that moves.

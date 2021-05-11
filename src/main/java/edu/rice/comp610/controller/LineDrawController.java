@@ -1,7 +1,7 @@
-package edu.rice.comp504.controller;
+package edu.rice.comp610.controller;
 
 import com.google.gson.Gson;
-import edu.rice.comp504.model.MovingLine;
+import edu.rice.comp610.model.MovingLine;
 
 import static spark.Spark.*;
 
