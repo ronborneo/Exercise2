@@ -6,6 +6,9 @@ let app;
 //id of current interval
 let intervalID;
 
+//boolean to keep track if line is drawn in canvas
+let isLineDrawn = false;
+
 /**
  * Draw and clear line on a the canvas
  * @param canvas  The canvas used to draw a line
@@ -48,6 +51,11 @@ window.onload = function() {
 function createLine() {
     $.get("/line", function (data) {
        // TODO: draw a line that does not move
+        console.log("data is " + data);
+        if (isLineDrawn === false) {
+            app.drawLine(data.startX, data.startY, data.endX, data.endY);
+            isLineDrawn = true;
+        }
     }, "json");
 }
 
@@ -56,6 +64,9 @@ function createLine() {
  */
 function setUpdateFreq() {
     // TODO: move the line every .2 seconds by setting an interval
+    if (intervalID == null && isLineDrawn) {
+        intervalID = setInterval(updateLine, 200)
+    }
 }
 
 /**
@@ -64,6 +75,9 @@ function setUpdateFreq() {
 function updateLine() {
     $.get("/update", function (data) {
        // TODO: update the line position
+        console.log("data is " + data);
+        clear();
+        app.drawLine(data.startX, data.startY, data.endX, data.endY);
     }, "json");
 }
 
@@ -73,6 +87,10 @@ function updateLine() {
 function reset() {
     $.get("/reset", function (data) {
         // TODO: reset the canvas, no line should appear
+        clearInterval(intervalID);
+        intervalID = null;
+        isLineDrawn = false;
+        clear();
     }, "json");
 
 

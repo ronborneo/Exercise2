@@ -17,6 +17,7 @@ public class MovingLine {
     public MovingLine(int velX) {
         this.velX = velX;
         // TODO: Set line at the original position
+        this.resetPos();
     }
 
     /**
@@ -24,6 +25,8 @@ public class MovingLine {
      */
     public void update() {
         // TODO: Update the line position in the x direction only
+        this.startX += this.velX;
+        this.endX += this.velX;
     }
 
     /**

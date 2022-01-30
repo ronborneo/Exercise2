@@ -22,17 +22,20 @@ public class LineDrawController {
 
         get("/line", (req, res) -> {
             // TODO: draw the line at the original location
-            return "draw line";
+            line.resetPos();
+            return gson.toJson(line);
         });
 
         get("/reset", (req, res) -> {
             // TODO: reset the canvas
-            return "reset canvas";
+            line.resetPos();
+            return gson.toJson(line);
         });
 
         get("/update", (req, res) ->  {
             // TODO: update the line position
-            return "update line";
+            line.update();
+            return gson.toJson(line);
         });
 
     }
