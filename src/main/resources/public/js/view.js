@@ -52,10 +52,9 @@ function createLine() {
     $.get("/line", function (data) {
        // TODO: draw a line that does not move
         console.log("data is " + data);
-        if (isLineDrawn === false) {
-            app.drawLine(data.startX, data.startY, data.endX, data.endY);
-            isLineDrawn = true;
-        }
+        initializeForNewLine();
+        app.drawLine(data.startX, data.startY, data.endX, data.endY);
+        isLineDrawn = true;
     }, "json");
 }
 
@@ -87,14 +86,17 @@ function updateLine() {
 function reset() {
     $.get("/reset", function (data) {
         // TODO: reset the canvas, no line should appear
-        clearInterval(intervalID);
-        intervalID = null;
-        isLineDrawn = false;
-        clear();
+        initializeForNewLine();
     }, "json");
-
-
 }
+
+function initializeForNewLine() {
+    clearInterval(intervalID);
+    intervalID = null;
+    isLineDrawn = false;
+    clear();
+}
+
 /**
  * Clear the canvas
  */
